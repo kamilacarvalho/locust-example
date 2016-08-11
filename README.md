@@ -100,3 +100,30 @@ class ApiUser(HttpLocust):
     min_wait = 1000
     max_wait = 3000
 ```
+
+Project imports 
+```javascript
+from locust import TaskSet, task, HttpLocust
+```
+
+In the above code, we create a class ```Converter Tasks``` where we specify our tasks for the tests through ```@task``` decorator:
+```javascript
+class ConverterTasks(TaskSet):
+    @task
+    def day_to_hour(self):
+        self.client.get('/dh/5')
+
+    @task
+    def day_to_minute(self):
+        self.client.get('/dm/2')
+```
+As our Locust customer is the type Http Locust, it was possible to use the ```self.client``` object in our ```task_set```. Note that the object of ```self.client``` ```ConverterTasks``` class consists of an HTTP client.
+
+And the ApiUser class where we specify our Locust customer HttpLocust type, filling the ```task_set``` attribute with ConverterTask class.
+```javascript
+class ApiUser(HttpLocust):
+    task_set = ConverterTasks
+    min_wait = 1000
+    max_wait = 3000
+```
+The ```min_wait``` ```max_wait``` attributes and specify the minimum and maximum time in milliseconds that the test should wait between performing a task and another. The default value of these attributes is 1000 (1 second).
