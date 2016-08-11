@@ -35,3 +35,31 @@ def conversion(rule, value):
 if __name__ == "__main__":
     app.run()
 ```
+
+Importing Flask
+```javascript
+from flask import Flask
+```
+This code block deals the conversion time.
+```javascript
+converter = {'DH': lambda d: d * 24,     # day to hours
+             'HM': lambda h: h * 60,     # hour to minutes
+             'MS': lambda m: m * 60,     # minute to seconds
+             'DM': lambda d: d * 1440,   # day to minutes
+             'DS': lambda d: d * 86400,  # day to seconds
+             'HS': lambda h: h * 3600}   # hour to seconds
+```
+
+?????
+```javascript
+@app.route('/<rule>/<int:value>')
+def conversion(rule, value):
+    try:
+        return str(converter[rule.upper()](value))
+    except KeyError:
+        return "Rule for conversion not found", 404
+
+
+if __name__ == "__main__":
+    app.run()
+```
