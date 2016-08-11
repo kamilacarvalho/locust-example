@@ -77,3 +77,26 @@ curl http://127.0.0.1:5000/hm/3
 ```
 
 Locus test:
+The tests are based on ```Tasks``` that are created in a class that inherits from the Locust ```taskset``` class. In taskset class which determines whether a method is a task is the presence of ```@task``` decorator.
+
+The Locust works with the concept of requests based on customers with specific characteristics. The main attribute of Locust client classes is ```task_set``` attribute, receiving the test class where tasks are specified. Since the focus is web application test, the relevant protocol is the HTTP protocol, so the base class for the creation of these customers is ```HttpLocust class```.
+
+To test some methods of our webservice, create a file called ```locust_script.py``` with the following code.
+```javascript
+from locust import TaskSet, task, HttpLocust
+
+class ConverterTasks(TaskSet):
+    @task
+    def day_to_hour(self):
+        self.client.get('/dh/5')
+
+    @task
+    def day_to_minute(self):
+        self.client.get('/dm/2')
+
+
+class ApiUser(HttpLocust):
+    task_set = ConverterTasks
+    min_wait = 1000
+    max_wait = 3000
+```
