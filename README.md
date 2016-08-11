@@ -63,3 +63,17 @@ def conversion(rule, value):
 if __name__ == "__main__":
     app.run()
 ```
+
+To execute this application you need to use the command ```python converter.py```:
+```javascript
+(venv)user@machine:~/locust$ python converter.py
+ * Running on http://127.0.0.1:5000/
+```
+
+To check if your application is running, open another tab in the terminal and make the following request:
+```javascript
+curl http://127.0.0.1:5000/hm/3
+180
+```
+
+Locus test:
