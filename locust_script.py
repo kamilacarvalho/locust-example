@@ -2,12 +2,8 @@ from locust import TaskSet, task, HttpLocust
 
 class ConverterTasks(TaskSet):
     @task
-    def day_to_hour(self):
-        self.client.get('/dh/5')
-
-    @task
-    def day_to_minute(self):
-        self.client.get('/dm/2')
+    def f_to_c(self):
+        self.client.get('/FC/20')
 
 
 class ApiUser(HttpLocust):
